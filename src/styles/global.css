@@ -1,0 +1,10 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+    font-family: wobble;
+    font-style: normal;
+    font-display: swap;
+    src: url("/fonts/wobbles.ttf") format("ttf");
+  }
