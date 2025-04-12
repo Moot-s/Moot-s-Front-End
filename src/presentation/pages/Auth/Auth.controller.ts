@@ -2,37 +2,93 @@ import axios from "axios";
 import { toast } from "sonner";
 
 export const AuthController = () => {
-    const apiUrl = import.meta.env.VITE_BACK_END_API_URL;
-    const apiKey = import.meta.env.VITE_BACK_END_API_KEY;
+  const apiUrl = import.meta.env.VITE_BACK_END_API_URL;
 
-    const handleLogin = async (e: React.FormEvent<HTMLFormElement>, login: (data: { username: string; token: string }) => Promise<void>) => {
-        e.preventDefault();
+  const handleLogin = async (
+    e: React.FormEvent<HTMLFormElement>,
+    login: (data: { username: string; token: string }) => Promise<void>
+  ) => {
+    e.preventDefault();
 
-        const formData = new FormData(e.target as HTMLFormElement);
-        const username = formData.get("username") as string;
-        const password = formData.get("password") as string;
+    const formData = new FormData(e.target as HTMLFormElement);
+    const identifier = formData.get("identifier") as string;
+    const password = formData.get("password") as string;
 
-        try {
-            const response = await axios.post(apiUrl + '/auth/local', {
-                username,
-                password,
-            }, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${apiKey}`,
-                }
-            });
-
-            if (response.status !== 201) throw new Error("Invalid credentials");
-
-            await login({ username: response.data.username, token: response.data.token });
-        } catch (error) {
-            toast.error("Invalid credentials", {
-                description: "Please check your username and password and try again.",
-            });
+    try {
+      const response = await axios.post(
+        apiUrl + "/auth/local",
+        {
+          identifier,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-    };
+      );
 
-    return { handleLogin };
+      if (response.status !== 201 && response.status !== 200)
+        throw new Error("Invalid credentials");
+
+      const { token, username: userFromResponse } = response.data;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("username", userFromResponse);
+
+      await login({ username: userFromResponse, token });
+      toast.success("Login successful", {
+        description: "Welcome back!",})
+    } catch (error) {
+      toast.error("Invalid credentials", {
+        description:
+          "Please check your username and password and try again.",
+      });
+    }
+  };
+
+  const handleRegister = async (
+    e: React.FormEvent<HTMLFormElement>,
+    login: (data: { username: string; token: string }) => Promise<void>
+  ) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target as HTMLFormElement);
+    const username = formData.get("identifier") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    try {
+      const response = await axios.post(
+        apiUrl + "/auth/local/register",
+        {
+          username,
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status !== 201 && response.status !== 200)
+        throw new Error("Invalid credentials");
+
+      const { token, username: userFromResponse } = response.data;
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("username", userFromResponse);
+
+      await login({ username: userFromResponse, token });
+    } catch (error) {
+      toast.error("Invalid credentials", {
+        description:
+          "Please check your username and password and try again.",
+      });
+    }
+  };
+
+  return { handleLogin, handleRegister };
 };
-

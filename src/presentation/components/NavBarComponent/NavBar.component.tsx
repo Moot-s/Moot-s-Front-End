@@ -2,7 +2,7 @@ import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@her
 
 export default function NavBarComponent() {
   return (
-    <div className="font-wobble tracking-widest rounded-lg bg-orange-300 shadow-lg">
+    <div className="font-wobble tracking-widest rounded-lg bg-white shadow-lg">
     <Navbar>
       <NavbarBrand>
         <img src="/img/logo.png" alt="Logo" className="h-8" />

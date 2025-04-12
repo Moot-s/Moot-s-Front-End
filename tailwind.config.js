@@ -7,6 +7,7 @@ export default {
       fontFamily: {
         wobble: ["Wobbles", "sans-serif"],
         montserrat: ["Montserrat", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
     },
     plugins: [],

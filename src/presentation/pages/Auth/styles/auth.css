@@ -1,0 +1,28 @@
+@media (max-width: 750px) {
+    .videoBg{
+        display: none;
+    }
+
+    .divInputs{
+        width: 100%;
+    }
+}
+
+.videoBg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(32, 32, 32, 0.486);
+  z-index: 5;
+}
+
+.videoFrame {
+  transform: scale(2);
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+}
