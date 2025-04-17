@@ -7,6 +7,7 @@ import AuthPage from './presentation/pages/Auth/Auth.component.tsx';
 import LandingPage from './presentation/pages/Landing/LandingPage.component.tsx';
 import Google from './presentation/pages/OAuth/Google/GoogleOAuth.component.tsx';
 
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HeroUIProvider>

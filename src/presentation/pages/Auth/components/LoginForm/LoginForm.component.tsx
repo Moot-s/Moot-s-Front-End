@@ -11,16 +11,15 @@ type LoginFormProps = {
 
 export default function LoginForm({ handleLogin, username, setUsername, password, setPassword }: LoginFormProps) {
   return (
-    <div className="flex items-center justify-center rounded-md">
-      <Card className="rounded-2xl">
+    <div className="flex items-center justify-center rounded-md w-full p-1">
+      <Card className="rounded-2xl w-full">
         <CardBody>
-          <div className="text-2xl font-bold font-wobble p-2 text-center">
-            <p className='text-pink-300'>Login</p>
+          <div className="flex items-center justify-center p-4">
+            <p className="font-wobble text-5xl text-pink-400">LOGIN</p>
           </div>
-          <img className="m-6 mx-auto hover:cursor-pointer" src="/img/logo.png" />
           <Form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <p className="block text-sm font-medium font-poppins text-pink-700">
+              <p className="block text-sm font-medium font-poppins text-gray-500">
                 Username
               </p>
               <Input
@@ -35,7 +34,7 @@ export default function LoginForm({ handleLogin, username, setUsername, password
               />
             </div>
             <div>
-              <p className="block text-sm font-medium font-poppins text-pink-700">
+              <p className="block text-sm font-medium font-poppins text-gray-500">
                 Password
               </p>
               <Input
@@ -49,7 +48,7 @@ export default function LoginForm({ handleLogin, username, setUsername, password
                 placeholder="Enter your password"
               />
             </div>
-            <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-poppins font-semibold transition duration-300 ease-in-out">
+            <Button type="submit" className="w-full bg-gray-500 hover:bg-gray-700 text-white rounded-md font-poppins font-semibold transition duration-300 ease-in-out">
               Login
             </Button>
           </Form>
