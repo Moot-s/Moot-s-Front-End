@@ -37,9 +37,6 @@ export const AuthController = () => {
         user: { username: userFromResponse, id, email },
       } = response.data;
 
-      localStorage.setItem("token", token);
-      localStorage.setItem("username", userFromResponse);
-
       await login({ username: userFromResponse, token, id, email });
       toast.success("Login successful", {
         description: "Welcome back to Moot's!",})

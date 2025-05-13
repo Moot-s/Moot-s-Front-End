@@ -5,12 +5,16 @@ import { User } from "../../types/User";
 
 type AuthContextType = {
   user: User | null;
+  token: string | null;
+  identifier: string | null;
   login: (data: User) => void;
   logout: () => void;
 };
 
 export const AuthContext = createContext<AuthContextType>({
   user: null,
+  token: null,
+  identifier: null,
   login: () => {},
   logout: () => {},
 });
@@ -21,7 +25,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = useCallback(async (data: User) => {
     setUser(data);
-    navigate("/profile");
+    navigate("/dashboard");
   }, [navigate, setUser]);
 
   const logout = useCallback(() => {
@@ -32,6 +36,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const value = useMemo(
     () => ({
       user,
+      token: user?.token,
+      identifier: user?.identifier,
       login,
       logout,
     }),

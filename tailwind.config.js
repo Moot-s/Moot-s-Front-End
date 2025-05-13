@@ -1,7 +1,14 @@
-const { heroui } = require("@heroui/react");
 
+import { heroui } from "@heroui/react";
+import typography from "@tailwindcss/typography";
+
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: [ "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}", "./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -11,6 +18,6 @@ export default {
       },
     },
     darkMode: "class",
-    plugins: [heroui(), require("@tailwindcss/typography")],
   },
+  plugins: [heroui(), typography],
 };

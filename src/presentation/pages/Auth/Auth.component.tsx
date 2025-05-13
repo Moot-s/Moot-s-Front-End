@@ -8,6 +8,7 @@ import './styles/auth.css';
 
 export default function LoginPage() {
   const [isRegister, setIsRegister] = useState(false);
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,7 +34,7 @@ export default function LoginPage() {
         <p className="mt-4 text-lg drop-shadow-lg text-white"></p>
       </div>
       <div className="w-full max-w-md p-8">
-          <div className="text-center mb-2 bg-white rounded-xl shadow-lg">
+          <div className="text-center mb-2 bg-white rounded-xl">
             {isRegister ? (
               <RegisterForm
                 handleRegister={(e) => handleRegister(e)}
@@ -53,7 +54,7 @@ export default function LoginPage() {
                 setPassword={setPassword}
               />
             )}
-            <div className='text-center p-4'>
+            <div className='text-center p-4 font-poppins'>
               <Button
                 type="button"
                 onClick={() => window.location.href = import.meta.env.VITE_GOOGLE_OAUTH_URL}

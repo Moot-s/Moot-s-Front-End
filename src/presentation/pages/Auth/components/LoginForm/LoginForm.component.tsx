@@ -12,13 +12,13 @@ type LoginFormProps = {
 export default function LoginForm({ handleLogin, username, setUsername, password, setPassword }: LoginFormProps) {
   return (
     <div className="flex items-center justify-center rounded-md w-full p-1">
-      <Card className="rounded-2xl w-full">
+      <Card className="rounded-2xl w-full shadow-none">
         <CardBody>
           <div className="flex items-center justify-center p-4">
             <p className="font-wobble text-5xl text-pink-400">LOGIN</p>
           </div>
           <Form onSubmit={handleLogin} className="space-y-4">
-            <div>
+            <div className="w-full">
               <p className="block text-sm font-medium font-poppins text-gray-500">
                 Username
               </p>
@@ -33,7 +33,7 @@ export default function LoginForm({ handleLogin, username, setUsername, password
                 placeholder="Enter your user/email"
               />
             </div>
-            <div>
+            <div className="w-full">
               <p className="block text-sm font-medium font-poppins text-gray-500">
                 Password
               </p>
