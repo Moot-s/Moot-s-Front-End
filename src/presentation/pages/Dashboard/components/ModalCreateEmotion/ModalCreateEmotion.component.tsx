@@ -1,11 +1,11 @@
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tooltip } from '@heroui/react'
 import { useAuth } from '../../../../../hooks/useAuth/useAuth';
-import { emotionController } from './ModalCreateEmotion.controller';
 import { useState } from 'react';
 
 type Props = {
     isOpen: boolean;
     onOpenChange: (open: boolean) => void;
+    createEmotion: (emotionName: string) => Promise<void>
 }
 
 const emotions = [
@@ -31,9 +31,8 @@ const emotionDescriptions: Record<string, { title: string, description: string }
     embarrased: { title: "Embarrassed!", description: "Remembering something awkward you said 5 years ago 😳" }
 }
 
-const ModalCreateEmotion = ({ isOpen, onOpenChange }: Props) => {
-    const {  user } = useAuth()
-    const token = import.meta.env.VITE_BACK_END_API_KEY as string
+const ModalCreateEmotion = ({ isOpen, onOpenChange, createEmotion }: Props) => {
+    const {  user, token } = useAuth()
     const [selectedEmotion, setSelectedEmotion] = useState<string | null>(null)
 
     const handleEmotionClick = (emotion: string) => {
@@ -42,7 +41,7 @@ const ModalCreateEmotion = ({ isOpen, onOpenChange }: Props) => {
 
     const handleSaveEmotion = async (onClose: () => void) => {
         if (!token || !selectedEmotion || !user?.id) return;
-        await emotionController.createEmotion(token, user.id.toString(), selectedEmotion.toUpperCase())
+        await createEmotion(selectedEmotion);
         setSelectedEmotion(null);
         onClose();
     };
@@ -100,10 +99,9 @@ const ModalCreateEmotion = ({ isOpen, onOpenChange }: Props) => {
                             <Button color="danger" variant="light" onPress={onClose}>
                                 Close
                             </Button>
-                            <Button color="primary" onPress={() => handleSaveEmotion(onClose)} isDisabled={!selectedEmotion}>
+                            <Button color="primary" onPress={() => handleSaveEmotion(() => handleSaveEmotion)} isDisabled={!selectedEmotion}>
                                 Save
                             </Button>
-
                         </ModalFooter>
                     </>
                 )}

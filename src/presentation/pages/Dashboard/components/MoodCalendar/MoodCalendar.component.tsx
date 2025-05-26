@@ -1,15 +1,42 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { format, eachDayOfInterval, getDay, isFirstDayOfMonth } from "date-fns";
 import { Emotions, EmotionColors } from "../../../../../types/Emotion";
 import { es } from "date-fns/locale";
-
-type Props = {
-  data: Record<string, Emotions>;
-};
+import { useAuth } from "../../../../../hooks/useAuth/useAuth";
 
 const dayLabels = ["D", "L", "M", "X", "J", "V", "S"];
 
-export const MoodCalendar: React.FC<Props> = ({ data }) => {
+type Props ={
+  getEmotionsAssignedToUser: () => Promise<any>
+}
+export const MoodCalendar = ({getEmotionsAssignedToUser} : Props) => {
+  const [data, setData] = useState<Record<string, Emotions>>({});
+  const { user } = useAuth();
+
+  useEffect(() => {
+  const fetchEmotions = async () => {
+    try {
+      const response = await getEmotionsAssignedToUser();
+
+      const res = Array.isArray(response) ? response : response?.emotions ?? [];
+
+      const formatted: Record<string, Emotions> = {};
+
+      res.forEach((entry: any) => {
+        const date = format(new Date(entry.emotionDay), "yyyy-MM-dd");
+        formatted[date] = entry.emotions; 
+      });
+
+      setData(formatted);
+    } catch (err) {
+      console.error("Error cargando emociones:", err);
+    }
+  };
+
+  fetchEmotions();
+}, [user?.identifier]);
+
+
   const year = new Date().getFullYear();
   const start = new Date(`${year}-01-01`);
   const end = new Date(`${year}-12-31`);
@@ -65,7 +92,6 @@ export const MoodCalendar: React.FC<Props> = ({ data }) => {
       <div className="flex gap-[2px]">
         {weeks.map((week, weekIdx) => (
           <div key={weekIdx} className="flex flex-col gap-[2px] relative">
-
             {monthLabels[weekIdx] && (
               <div className="absolute -top-5 left-1/2 -translate-x-1/2 text-[10px] font-semibold text-gray-500">
                 {monthLabels[weekIdx]}
@@ -76,10 +102,12 @@ export const MoodCalendar: React.FC<Props> = ({ data }) => {
               if (!day) {
                 return (
                   <div
-                  key={dayIdx}
-                  className="flex items-center justify-center text-sm font-wobble w-4 h-4 rounded bg-gray-200"
-                  title="Día fuera del año"
-                ><p className="text-red-500 text-xs">x</p></div>
+                    key={dayIdx}
+                    className="flex items-center justify-center text-sm font-wobble w-4 h-4 rounded bg-gray-200"
+                    title="Día fuera del año"
+                  >
+                    <p className="text-red-500 text-xs">x</p>
+                  </div>
                 );
               }
 

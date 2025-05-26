@@ -37,7 +37,7 @@ export const AuthController = () => {
         user: { username: userFromResponse, id, email },
       } = response.data;
 
-      await login({ username: userFromResponse, token, id, email });
+      login({ username: userFromResponse, token, id, email, documentId: 0 });
       toast.success("Login successful", {
         description: "Welcome back to Moot's!",})
     } catch (error) {

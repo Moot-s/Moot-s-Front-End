@@ -1,45 +1,30 @@
-import { toast } from "sonner";
-import { Emotion, EmotionPayload } from "../../types/Emotion";
 
-const getAll = async (token: string): Promise<Emotion[]> => {
-    const baseURL = import.meta.env.VITE_BACK_END_API_URL + '/v1/crm/s/client';
+import { EmotionPayload } from "../../types/Emotion";
+
+const getEmotionsAssignedToUser = async (
+    token: string,
+    userId: string
+): Promise<void> => {
+    const baseURL = import.meta.env.VITE_BACK_END_API_URL + '/user-emotion/' + userId;
     const url = new URL(baseURL);
 
     try {
         const resp = await fetch(url.href, {
+            method: 'GET',
             headers: {
+                'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,
             },
         });
 
         if (!resp.ok) {
-            toast.error(`Error fetching response: ${resp.statusText}`);
+            const errorText = await resp.text();
+            throw new Error(`Error ${resp.status}: ${errorText}`);
         }
 
-        const response: Emotion[] = await resp.json();
-        return response;
-    } catch (error) {
-        throw error;
-    }
-};
+        const result = await resp.json();
+        return result;
 
-const get = async (token: string, id: string): Promise<Emotion[]> => {
-    const baseURL = import.meta.env.VITE_BACK_END_API_URL + '/v1/crm/s/client' + `/${id}`;
-    const url = new URL(baseURL);
-
-    try {
-        const resp = await fetch(url.href, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        if (!resp.ok) {
-            toast.error(`Error fetching response: ${resp.statusText}`);
-        }
-
-        const response: Emotion[] = await resp.json();
-        return response;
     } catch (error) {
         throw error;
     }
@@ -76,7 +61,6 @@ const post = async (
 };
 
 export const emotionService = {
-    getAll,
-    get,
+    getEmotionsAssignedToUser,
     post
 };

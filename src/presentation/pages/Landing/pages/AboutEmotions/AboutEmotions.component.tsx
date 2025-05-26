@@ -15,29 +15,31 @@ const AboutEmotions = () => {
         <div className="w-full min-h-screen overflow-hidden flex flex-col items-center justify-center bg-gradient-to-r from-rose-100 to-teal-100 px-4 py-10">
             <p className="mt-2 text-4xl tracking-tight text-pretty text-gray-900 sm:text-5xl font-poppins font-bold text-center mb-10">What emotions we have?</p>
 
-            <ScrollShadow
-                className="w-full h-40 rounded-2xl p-2"
-                orientation="horizontal"
-                hideScrollBar={true}
-            >
-                <div className="flex items-center justify-start sm:justify-center gap-4 sm:gap-6">
-                    {Emotions.map((emotion, i) => (
-                        <motion.div
-                            key={i}
-                            className="flex flex-col items-center cursor-pointer"
-                            onClick={() => setSelectedEmotion(emotion)}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <img
-                                src={emotion.image}
-                                alt={emotion.title}
-                                className="w-24 h-24 sm:w-40 sm:h-40 object-contain rounded-xl"
-                            />
-                        </motion.div>
-                    ))}
-                </div>
-            </ScrollShadow>
+            <div className="w-full overflow-x-auto">
+                <ScrollShadow
+                    className="w-max sm:w-full h-40 rounded-2xl p-2"
+                    orientation="horizontal"
+                    hideScrollBar={true}
+                >
+                    <div className="flex items-center gap-4 sm:justify-center sm:gap-6">
+                        {Emotions.map((emotion, i) => (
+                            <motion.div
+                                key={i}
+                                className="flex flex-col items-center cursor-pointer"
+                                onClick={() => setSelectedEmotion(emotion)}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <img
+                                    src={emotion.image}
+                                    alt={emotion.title}
+                                    className="w-20 h-20 sm:w-40 sm:h-40 object-contain rounded-xl"
+                                />
+                            </motion.div>
+                        ))}
+                    </div>
+                </ScrollShadow>
+            </div>
 
             <AnimatePresence mode="wait">
                 {selectedEmotion && (

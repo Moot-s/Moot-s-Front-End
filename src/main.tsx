@@ -6,6 +6,7 @@ import './styles/balloon.css'
 import { BrowserRouter } from 'react-router';
 import AppRoutes from './routes/routes';
 import { AuthProvider } from './hooks/useAuth/authContext';
+import { Toaster } from 'sonner';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <HeroUIProvider>
         <AuthProvider>
+          <Toaster richColors/>
           <AppRoutes />
         </AuthProvider>
       </HeroUIProvider>

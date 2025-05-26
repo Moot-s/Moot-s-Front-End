@@ -19,7 +19,7 @@ type Props = {
 
 export default function NavDashboard({ onOpen }: Props) {
 
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
   return (
     <Navbar>
       <NavbarBrand>
@@ -36,7 +36,7 @@ export default function NavDashboard({ onOpen }: Props) {
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <div className="flex flex-row gap-2 cursor-pointer">
-              <p className="text-gray-600 capitalize">{user?.username}</p>
+              <p className="text-gray-600">{user?.username}</p>
               <ProfileIcon className="fill-gray-600"/>
             </div>
           </DropdownTrigger>
@@ -46,12 +46,7 @@ export default function NavDashboard({ onOpen }: Props) {
               <p className="font-semibold">{user?.email}</p>
             </DropdownItem>
             <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="team_settings">Team Settings</DropdownItem>
-            <DropdownItem key="analytics">Analytics</DropdownItem>
-            <DropdownItem key="system">System</DropdownItem>
-            <DropdownItem key="configurations">Configurations</DropdownItem>
-            <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-            <DropdownItem key="logout" color="danger">
+            <DropdownItem key="logout" color="danger" onPress={() =>{logout()}}>
               Log Out
             </DropdownItem>
           </DropdownMenu>

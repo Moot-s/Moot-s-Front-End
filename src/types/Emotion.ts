@@ -39,8 +39,7 @@ export interface Emotion {
 
 export interface EmotionPayload {
   emotions: string;
-  entry: string;
-  userId: string;
+  user: string;
   emotionDay: string;
 }
 

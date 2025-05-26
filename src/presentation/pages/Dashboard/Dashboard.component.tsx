@@ -1,23 +1,18 @@
 import { Button, useDisclosure } from "@heroui/react";
-import { Emotions } from "../../../types/Emotion";
 import { MoodCalendar } from "./components/MoodCalendar/MoodCalendar.component";
 import NavDashboard from "./components/NavDashboard/NavDashboard.component"
 import { lazy, Suspense } from "react";
-import { useAuth } from "../../../hooks/useAuth/useAuth";
 import PlusIcon from "../../icons/PlusIcon/PlusIcon";
+import { useAuth } from "../../../hooks/useAuth/useAuth";
+import DashboardController from "./Dashboard.controller";
 
 const ModalCreateEmotionLazy = lazy(() => import('./components/ModalCreateEmotion/ModalCreateEmotion.component'));
 
 const DashboardPage = () => {
-
   const { user } = useAuth()
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const moodData = {
-    "2025-01-01": Emotions.HAPPY,
-    "2025-01-02": Emotions.ANGRY,
-    "2025-01-03": Emotions.SURPRISED,
-  };
+  const { createEmotion, getEmotionsAssignedToUser } = DashboardController({user});
 
   return (
     <>
@@ -35,12 +30,12 @@ const DashboardPage = () => {
           <div className="flex flex-row items-center justify-center gap-2 mb-12">
           <Button className="bg-pink-400 rounded-md text-white" startContent={<PlusIcon />} onPress={() => onOpen()}>Add emotion</Button>
           </div>
-          <MoodCalendar data={moodData} />
+          <MoodCalendar getEmotionsAssignedToUser={getEmotionsAssignedToUser}/>
         </div>
       </div>
 
       <Suspense>
-        <ModalCreateEmotionLazy isOpen={isOpen} onOpenChange={onOpenChange} />
+        <ModalCreateEmotionLazy isOpen={isOpen} onOpenChange={onOpenChange} createEmotion={createEmotion} />
       </Suspense>
     </>
   )

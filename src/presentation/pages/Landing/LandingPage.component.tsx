@@ -63,13 +63,13 @@ export default function LandingPage() {
 
       {pageIndex < pages.length - 1 && (
         <a onClick={handleNextPage}>
-          <ChevronDownIcon className="w-8 h-8 absolute bottom-10 left-1/2 transform -translate-x-1/2 text-gray-500 animate-bounce cursor-pointer" />
+          <ChevronDownIcon className="w-8 h-8 lg:absolute bottom-10 left-1/2 transform -translate-x-1/2 text-gray-500 animate-bounce cursor-pointer hidden" />
         </a>
       )}
 
       {pageIndex > 0 && (
         <a onClick={handlePreviousPage}>
-          <ChevronUpIcon className="w-8 h-8 rotate-180 absolute top-24 left-1/2 transform -translate-x-1/2 text-gray-500 animate-bounce cursor-pointer" />
+          <ChevronUpIcon className="w-8 h-8 rotate-180 lg:absolute top-20 left-1/2 transform -translate-x-1/2 text-gray-500 animate-bounce cursor-pointer hidden" />
         </a>
       )}
     </div>

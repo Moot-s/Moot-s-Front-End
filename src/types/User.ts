@@ -1,7 +1,7 @@
 import { EmotionPayload } from "./Emotion";
 
 export interface User {
-    id: number;
+    documentId: number;
     username: string;
     email: string;
     provider?: string;
@@ -12,5 +12,6 @@ export interface User {
     identifier?: string;
     emotions?: EmotionPayload[]
     token?: string;
+    id? : number;
   }
   
