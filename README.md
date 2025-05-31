@@ -1,54 +1,73 @@
-# React + TypeScript + Vite
+<h1 align="center">
+  <br>
+  <img src="https://i.ibb.co/q31b51rD/logo.png" alt="Moot's Logo">
+</h1>
+<h3 align="center">Moot's – Track Your Moods with Style</h3>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Moot's is a web application built with React that helps users understand, track, and reflect on their emotions. Featuring a yearly interactive mood calendar and a friendly animated balloon, the platform visualizes emotional patterns to promote mental well-being.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌍 Live URL
 
-## Expanding the ESLint configuration
+🔗 [https://moots.unaigonzalez.es](https://moots.unaigonzalez.es)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## ⚙️ Tech Stack
+
+- React
+- Tailwind CSS
+- Vite
+- Netlify (deployment)
+
+---
+
+## 🧠 Features
+
+- 🎨 **Mood Calendar** – Track daily moods visually with colored squares for the past year.
+- 🎈 **Animated Balloon** – A friendly balloon reacts to your mood with facial expressions and color.
+- 📊 **Statistics Dashboard** – Analyze trends like most common mood, monthly changes, and more.
+- 🌐 **Responsive Design** – Fully functional on desktop, tablet, and mobile.
+- 🏠 **Landing Page** – Clean introduction to the app's purpose and features.
+
+---
+
+## 🛠 Installation
+
+Make sure you have Node.js and npm installed.
+
+```bash
+# Clone the repository
+git clone https://github.com/Moot-s/Moot-s-Front-End
+
+# Install dependencies
+cd moots-frontend
+npm install
+
+# Run the app locally
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📌 To-Do
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- 🧭 Calendar filter by mood
+- 🔔 Daily mood reminder (via notifications)
+- 🧩 Gamification badges
+- 💾 Export data as CSV
+
+---
+
+## 👤 Author
+
+**Unai González**
+
+- 🌐 [unaigonzalez.es](https://unaigonzalez.es)
+- 🐦 [@unaiitxuu](https://twitter.com/unaiitxuu)
+- 💻 [GitHub](https://github.com/unaigonzalezz)
+
+---
+
+⭐️ Give a star if you like the project!
