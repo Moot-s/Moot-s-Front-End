@@ -1,11 +1,11 @@
 @media (max-width: 750px) {
-    .videoBg{
-        display: none;
-    }
+  .videoBg {
+    display: none;
+  }
 
-    .divInputs{
-        width: 100%;
-    }
+  .divInputs {
+    width: 100%;
+  }
 }
 
 .videoBg::before {

@@ -1,6 +1,8 @@
-import { Button } from "@heroui/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+
+import { Button } from "@heroui/react";
+
 import ProfileIcon from "../../../../icons/ProfileIcon/ProfileIcon";
 
 const navItems = [
@@ -9,7 +11,13 @@ const navItems = [
   { label: "Emociones", page: 2 },
 ];
 
-export default function Navbar({ currentPage, setPageIndex }: { currentPage: number, setPageIndex: (index: number) => void }) {
+export default function Navbar({
+  currentPage,
+  setPageIndex,
+}: {
+  currentPage: number;
+  setPageIndex: (index: number) => void;
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -55,7 +63,7 @@ export default function Navbar({ currentPage, setPageIndex }: { currentPage: num
           <Button
             startContent={<ProfileIcon className="fill-gray-600" />}
             className="text-gray-600 font-semibold"
-            onPress={() => (window.location.href = "/auth")}
+            onPress={() => (window.location.href = "/dashboard")}
           >
             Dashboard
           </Button>

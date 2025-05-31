@@ -1,4 +1,3 @@
-
 import { heroui } from "@heroui/react";
 import typography from "@tailwindcss/typography";
 

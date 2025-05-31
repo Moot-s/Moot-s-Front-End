@@ -2,30 +2,38 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import url('https://fonts.cdnfonts.com/css/montserrat');
-@import url('https://fonts.cdnfonts.com/css/poppins');
+@import url("https://fonts.cdnfonts.com/css/montserrat");
+@import url("https://fonts.cdnfonts.com/css/poppins");
 
 @font-face {
-    font-family: wobble;
-    font-style: normal;
-    font-display: swap;
-    src: url("/fonts/wobbles.ttf") format("ttf");
+  font-family: wobble;
+  font-style: normal;
+  font-display: swap;
+  src: url("/fonts/wobbles.ttf") format("ttf");
 }
 
-*{
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
 }
 
 @keyframes scroll-left {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  0% {
+    transform: translateX(0%);
   }
-  
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .scroll-animation {
-animation: scroll-left 5s linear infinite;
+  animation: scroll-left 5s linear infinite;
+}
+
+.text-shadow {
+  text-shadow:
+    2px 2px #191919,
+    4px 4px #191919,
+    6px 6px #191919,
+    8px 8px #191919;
 }

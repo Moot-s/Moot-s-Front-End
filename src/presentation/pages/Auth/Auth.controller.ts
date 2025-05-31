@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "sonner";
+
 import { User } from "../../../types/User";
 
 export const AuthController = () => {
@@ -7,7 +8,7 @@ export const AuthController = () => {
 
   const handleLogin = async (
     e: React.FormEvent<HTMLFormElement>,
-    login: (data: User) => void
+    login: (data: User) => void,
   ) => {
     e.preventDefault();
 
@@ -26,7 +27,7 @@ export const AuthController = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       if (response.status !== 201 && response.status !== 200)
@@ -39,19 +40,17 @@ export const AuthController = () => {
 
       login({ username: userFromResponse, token, id, email, documentId: 0 });
       toast.success("Login successful", {
-        description: "Welcome back to Moot's!",})
+        description: "Welcome back to Moot's!",
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
       toast.error("Invalid credentials", {
-        description:
-          "Please check your username and password and try again.",
+        description: "Please check your username and password and try again.",
       });
     }
   };
 
-  const handleRegister = async (
-    e: React.FormEvent<HTMLFormElement>,
-  ) => {
+  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
@@ -71,17 +70,19 @@ export const AuthController = () => {
           headers: {
             "Content-Type": "application/json",
           },
-        }
+        },
       );
 
       if (response.status !== 201 && response.status !== 200)
         throw new Error("Invalid credentials");
-
+      else
+        toast.success("Registration successful", {
+          description: "Welcome to Moot's!",
+        });
     } catch (error) {
       console.log(error);
       toast.error("Invalid credentials", {
-        description:
-          "Please check your username and password and try again.",
+        description: "Please check your username and password and try again.",
       });
     }
   };

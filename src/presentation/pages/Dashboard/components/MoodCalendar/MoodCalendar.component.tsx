@@ -1,41 +1,44 @@
-import { useEffect, useState } from "react";
-import { format, eachDayOfInterval, getDay, isFirstDayOfMonth } from "date-fns";
-import { Emotions, EmotionColors } from "../../../../../types/Emotion";
+import { eachDayOfInterval, format, getDay, isFirstDayOfMonth } from "date-fns";
 import { es } from "date-fns/locale";
+import { useEffect, useState } from "react";
+
 import { useAuth } from "../../../../../hooks/useAuth/useAuth";
+import { Emotions } from "../../../../utils/emotion";
 
 const dayLabels = ["D", "L", "M", "X", "J", "V", "S"];
 
-type Props ={
-  getEmotionsAssignedToUser: () => Promise<any>
-}
-export const MoodCalendar = ({getEmotionsAssignedToUser} : Props) => {
-  const [data, setData] = useState<Record<string, Emotions>>({});
+type Props = {
+  getEmotionsAssignedToUser: () => Promise<any>;
+};
+
+export const MoodCalendar = ({ getEmotionsAssignedToUser }: Props) => {
+  const [data, setData] = useState<Record<string, string>>({});
   const { user } = useAuth();
 
   useEffect(() => {
-  const fetchEmotions = async () => {
-    try {
-      const response = await getEmotionsAssignedToUser();
+    const fetchEmotions = async () => {
+      try {
+        const response = await getEmotionsAssignedToUser();
 
-      const res = Array.isArray(response) ? response : response?.emotions ?? [];
+        const res = Array.isArray(response)
+          ? response
+          : (response?.emotions ?? []);
 
-      const formatted: Record<string, Emotions> = {};
+        const formatted: Record<string, string> = {};
 
-      res.forEach((entry: any) => {
-        const date = format(new Date(entry.emotionDay), "yyyy-MM-dd");
-        formatted[date] = entry.emotions; 
-      });
+        res.forEach((entry: any) => {
+          const date = format(new Date(entry.emotionDay), "yyyy-MM-dd");
+          formatted[date] = entry.emotions;
+        });
 
-      setData(formatted);
-    } catch (err) {
-      console.error("Error cargando emociones:", err);
-    }
-  };
+        setData(formatted);
+      } catch (err) {
+        console.error("Error cargando emociones:", err);
+      }
+    };
 
-  fetchEmotions();
-}, [user?.identifier]);
-
+    fetchEmotions();
+  }, [user?.identifier]);
 
   const year = new Date().getFullYear();
   const start = new Date(`${year}-01-01`);
@@ -69,15 +72,22 @@ export const MoodCalendar = ({getEmotionsAssignedToUser} : Props) => {
 
   const monthLabels: Record<number, string> = {};
   weeks.forEach((week, weekIdx) => {
-    week.forEach((day, _dayIdx) => {
+    week.forEach((day) => {
       if (day && isFirstDayOfMonth(day)) {
         monthLabels[weekIdx] = format(day, "MMM", { locale: es });
       }
     });
   });
 
+  const getColorForEmotion = (emotionTitle: string) => {
+    const found = Emotions.find(
+      (e) => e.title.toLowerCase() === emotionTitle.toLowerCase(),
+    );
+    return found ? found.color : "#E5E7EB";
+  };
+
   return (
-    <div className="flex font-poppins">
+    <div className="flex font-poppins mt-4">
       <div className="flex flex-col gap-[2px] mr-1">
         {dayLabels.map((label, i) => (
           <div
@@ -104,22 +114,23 @@ export const MoodCalendar = ({getEmotionsAssignedToUser} : Props) => {
                   <div
                     key={dayIdx}
                     className="flex items-center justify-center text-sm font-wobble w-4 h-4 rounded bg-gray-200"
-                    title="Día fuera del año"
+                    title="Day outside of current year"
                   >
-                    <p className="text-red-500 text-xs">x</p>
+                    <p className="text-red-500 text-xs font-wobble">x</p>
                   </div>
                 );
               }
 
               const dateStr = format(day, "yyyy-MM-dd");
               const emotion = data[dateStr];
-              const color = emotion ? EmotionColors[emotion] : "bg-neutral-200";
+              const color = emotion ? getColorForEmotion(emotion) : "#E5E7EB";
 
               return (
                 <div
                   key={dayIdx}
-                  className={`w-4 h-4 rounded ${color}`}
+                  className="w-4 h-4 rounded"
                   title={dateStr + (emotion ? ` - ${emotion}` : "")}
+                  style={{ backgroundColor: color }}
                 />
               );
             })}

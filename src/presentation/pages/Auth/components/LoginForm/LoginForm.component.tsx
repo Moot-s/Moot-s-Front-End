@@ -1,5 +1,6 @@
-import { Card, Button, CardBody, Input, Form } from "@heroui/react";
-import { FormEvent } from 'react';
+import { FormEvent } from "react";
+
+import { Button, Card, CardBody, Form, Input } from "@heroui/react";
 
 type LoginFormProps = {
   handleLogin: (e: FormEvent<HTMLFormElement>) => Promise<void>;
@@ -9,7 +10,13 @@ type LoginFormProps = {
   setPassword: (value: string) => void;
 };
 
-export default function LoginForm({ handleLogin, username, setUsername, password, setPassword }: LoginFormProps) {
+export default function LoginForm({
+  handleLogin,
+  username,
+  setUsername,
+  password,
+  setPassword,
+}: LoginFormProps) {
   return (
     <div className="flex items-center justify-center rounded-md w-full p-1">
       <Card className="rounded-2xl w-full shadow-none">
@@ -48,7 +55,10 @@ export default function LoginForm({ handleLogin, username, setUsername, password
                 placeholder="Enter your password"
               />
             </div>
-            <Button type="submit" className="w-full bg-gray-500 hover:bg-gray-700 text-white rounded-md font-poppins font-semibold transition duration-300 ease-in-out">
+            <Button
+              type="submit"
+              className="w-full bg-gray-500 hover:bg-gray-700 text-white rounded-md font-poppins font-semibold transition duration-300 ease-in-out"
+            >
               Login
             </Button>
           </Form>
