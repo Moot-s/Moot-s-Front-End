@@ -1,5 +1,6 @@
-import { Card, Button, CardBody, Input, Form } from "@heroui/react";
 import { FormEvent } from "react";
+
+import { Button, Card, CardBody, Form, Input } from "@heroui/react";
 
 type RegisterFormProps = {
   handleRegister: (e: FormEvent<HTMLFormElement>) => Promise<void>;
@@ -24,8 +25,8 @@ export default function RegisterForm({
     <div className="flex items-center justify-center rounded-md p-1">
       <Card className="rounded-2xl w-full shadow-none">
         <CardBody>
-        <div className="flex items-center justify-center p-4">
-            <p className="font-wobble text-5xl text-pink-400">REGISTER</p>
+          <div className="flex items-center justify-center p-4">
+            <p className="font-wobble text-4xl text-pink-400">REGISTER</p>
           </div>
           <Form onSubmit={handleRegister} className="space-y-4">
             <div className="w-full">
@@ -73,8 +74,11 @@ export default function RegisterForm({
                 placeholder="Enter your password"
               />
             </div>
-            <Button type="submit" className="w-full bg-gray-500 hover:bg-gray-700 text-white rounded-md font-poppins font-semibold transition duration-300 ease-in-out">
-            Register
+            <Button
+              type="submit"
+              className="w-full bg-gray-500 hover:bg-gray-700 text-white rounded-md font-poppins font-semibold transition duration-300 ease-in-out"
+            >
+              Register
             </Button>
           </Form>
         </CardBody>

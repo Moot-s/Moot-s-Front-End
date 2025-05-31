@@ -1,36 +1,25 @@
 import { User } from "./User";
 
 export enum Emotions {
-  ANGRY = 'ANGRY',
-  SAD = 'SAD',
-  CALM = 'CALM',
-  WORRIED = 'WORRIED',
-  HAPPY = 'HAPPY',
-  EMBARRASSED = 'EMBARRASSED',
-  UNCOMFORTABLE = 'UNCOMFORTABLE',
-  CONFUSED = 'CONFUSED',
-  BORED = 'BORED',
-  EXCITED = 'EXCITED',
-  SURPRISED = 'SURPRISED',
+  ANGRY = "ANGRY",
+  BORED = "BORED",
+  CALM = "CALM",
+  CONFUSED = "CONFUSED",
+  EMBARRASSED = "EMBARRASSED",
+  EXCITED = "EXCITED",
+  HAPPY = "HAPPY",
+  SAD = "SAD",
+  SURPRISED = "SURPRISED",
+  UNCOMFORTABLE = "UNCOMFORTABLE",
+  WORRIED = "WORRIED",
 }
-
-export const EmotionColors: Record<Emotions, string> = {
-  [Emotions.ANGRY]: "bg-red-700",
-  [Emotions.SAD]: "bg-blue-700",
-  [Emotions.CALM]: "bg-teal-400",
-  [Emotions.WORRIED]: "bg-orange-400",
-  [Emotions.HAPPY]: "bg-yellow-400",
-  [Emotions.EMBARRASSED]: "bg-pink-500",
-  [Emotions.UNCOMFORTABLE]: "bg-amber-700",
-  [Emotions.CONFUSED]: "bg-purple-500",
-  [Emotions.BORED]: "bg-gray-400",
-  [Emotions.EXCITED]: "bg-green-500",
-  [Emotions.SURPRISED]: "bg-indigo-400",
-};
 
 export interface Emotion {
   id: number;
-  createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  emotions: Emotions;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt?: Date;
+  emotions: Emotions;
   createdOn: Date;
   updatedOn?: Date;
   entry: string;
@@ -43,3 +32,32 @@ export interface EmotionPayload {
   emotionDay: string;
 }
 
+export interface EmotionAssigned {
+  id: number;
+  documentId: string;
+  emotions: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  locale: string | null;
+  emotionDay: string;
+  user: {
+    id: number;
+    documentId: string;
+    username: string;
+    email: string;
+    provider: string;
+    password: string;
+    resetPasswordToken: string | null;
+    confirmationToken: string | null;
+    confirmed: boolean;
+    blocked: boolean;
+    createdAt: string;
+    updatedAt: string;
+    publishedAt: string;
+    locale: string | null;
+  };
+  createdBy: any;
+  updatedBy: any;
+  localizations: any[];
+}
